@@ -14,15 +14,30 @@ function RegisterPage() {
   });
   const { register } = useAuth();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (errorMessage) setErrorMessage('');
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    register(formData);
+    const emailValid = formData.email.includes('@') && formData.email.includes('.');
+    const passwordValid = formData.password.trim().length >= 6;
+
+    if (!emailValid || !passwordValid) {
+      setErrorMessage('Enter a valid email and a password with at least 6 characters.');
+      return;
+    }
+
+    const result = register(formData);
+    if (!result.ok) {
+      setErrorMessage(result.error || 'Unable to register with these details.');
+      return;
+    }
+
     navigate('/login');
   };
 
@@ -117,6 +132,7 @@ function RegisterPage() {
             <button type="submit" className="auth-submit">
               Create Account
             </button>
+            {errorMessage ? <p className="auth-error">{errorMessage}</p> : null}
           </form>
 
           <p className="auth-footer">

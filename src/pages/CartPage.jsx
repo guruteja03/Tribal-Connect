@@ -6,7 +6,6 @@ import { getCart, getProducts, saveCart } from '../utils/storage';
 import ProductImage from '../components/ProductImage';
 import { fadeUpItem, staggerContainer } from '../components/animations/MotionPresets';
 import './Cart.css';
-import bambooBasketImage from '../../punarnawa-soul-of-artistry-basket-default-title-n-handwoven-bamboo-mesh-basket-32440752242745.webp';
 
 const craftImageLibrary = [
   {
@@ -19,7 +18,7 @@ const craftImageLibrary = [
   },
   {
     keywords: ['bamboo', 'basket', 'reed', 'palm', 'grass'],
-    image: bambooBasketImage
+    image: '/images/bamboo-basket.webp'
   },
   {
     keywords: ['beaded', 'bead', 'jewelry', 'necklace', 'anklet'],
@@ -80,7 +79,7 @@ export const sampleCartItems = [
     quantity: 1,
     description:
       'Woven from treated bamboo strips by skilled tribal artisans for durability and elegance. The patterning is inspired by seasonal festival markets and agrarian life. Lightweight, sustainable, and deeply rooted in eco-conscious craft heritage.',
-    image: bambooBasketImage
+    image: '/images/bamboo-basket.webp'
   },
   {
     id: 'tribal-beaded-jewelry',
@@ -335,4 +334,5 @@ function CartPage() {
 }
 
 export default CartPage;
+
 

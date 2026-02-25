@@ -18,31 +18,56 @@ const getStoredUser = () => {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(getStoredUser());
 
+  const getStoredUsers = () => {
+    try {
+      return JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    } catch {
+      return [];
+    }
+  };
+
   const persistUserRecord = (record) => {
-    const existing = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    const withoutCurrent = existing.filter((item) => item.email !== record.email);
+    const existing = getStoredUsers();
+    const withoutCurrent = existing.filter((item) => String(item.email).toLowerCase() !== String(record.email).toLowerCase());
     localStorage.setItem(USERS_KEY, JSON.stringify([{ ...record }, ...withoutCurrent]));
   };
 
-  // Stores the logged in user with selected role in localStorage.
-  const login = ({ email, role, name }) => {
+  const login = ({ email, password, role }) => {
+    const users = getStoredUsers();
+    const matchedUser = users.find(
+      (item) =>
+        String(item.email).toLowerCase() === String(email).toLowerCase()
+        && item.password === password
+        && item.role === role
+    );
+
+    if (!matchedUser) return null;
+
     const loggedInUser = {
-      id: Date.now(),
-      name: name || email.split('@')[0],
-      email,
-      role,
+      id: matchedUser.id || Date.now(),
+      name: matchedUser.name || String(email).split('@')[0],
+      email: matchedUser.email,
+      role: matchedUser.role,
     };
     localStorage.setItem(AUTH_KEY, JSON.stringify(loggedInUser));
-    persistUserRecord(loggedInUser);
     setUser(loggedInUser);
     return loggedInUser;
   };
 
-  const register = ({ name, email, role }) => {
-    const saved = { id: Date.now(), name, email, role };
+  const register = ({ name, email, password, role }) => {
+    const existingUsers = getStoredUsers();
+    const emailTaken = existingUsers.some(
+      (item) => String(item.email).toLowerCase() === String(email).toLowerCase()
+    );
+
+    if (emailTaken) {
+      return { ok: false, error: 'An account with this email already exists.' };
+    }
+
+    const saved = { id: Date.now(), name, email, password, role };
     localStorage.setItem('tribalcraft_registered_user', JSON.stringify(saved));
     persistUserRecord(saved);
-    return true;
+    return { ok: true };
   };
 
   const logout = () => {

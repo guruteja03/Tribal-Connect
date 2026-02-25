@@ -1,27 +1,16 @@
-import bambooBasketImage from '../../punarnawa-soul-of-artistry-basket-default-title-n-handwoven-bamboo-mesh-basket-32440752242745.webp';
-import terracottaRitualLampImage from '../../813J3ThZ05L._AC_UF1000,1000_QL80_.jpg';
-import wallMatImage from '../../mat.jpg';
-import chhauMaskImage from '../../Handcrafted_Tribal_Mask_of_West_Bengal,_India._Chhau_Mask.jpg';
-import handloomCottonStoleImage from '../../chatgpt_image_jun_9_2025_04_03_02_pm.png';
-import storageBoxImage from '../../storage box.webp';
-
 const productImages = {
-  bambooBasket: bambooBasketImage,
-  terracottaLamp: terracottaRitualLampImage,
+  bambooBasket: '/images/bamboo-basket.webp',
+  terracottaLamp: '/images/terracotta-ritual-lamp.jpg',
   beadNecklace: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ancestral%20Naga%20Tribal%20Beads.jpg',
-  wallMat: wallMatImage,
-  woodMask: chhauMaskImage,
-  handloomStole: handloomCottonStoleImage,
+  wallMat: '/images/natural-fiber-wall-mat.jpg',
+  woodMask: '/images/wood-carved-mask.jpg',
+  handloomStole: '/images/handloom-cotton-stole.png',
   dokraFigurine: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dhokra%20%28couple%29.jpg',
-  palmLeafBox: storageBoxImage,
-  cushionCover: 'https://picsum.photos/seed/adivasi-cushion-cover/900/700',
-  paintedVase: 'https://picsum.photos/seed/painted-clay-vase/900/700',
-  reedMatSet: 'https://picsum.photos/seed/reed-table-mat-set/900/700',
-  servingTray: 'https://picsum.photos/seed/wooden-serving-tray/900/700',
-  juteBag: 'https://picsum.photos/seed/handcrafted-jute-bag/900/700',
-  spiceJars: 'https://picsum.photos/seed/terracotta-spice-jars/900/700',
-  ankletPair: 'https://picsum.photos/seed/beaded-anklet-pair/900/700',
-  laundryHamper: 'https://picsum.photos/seed/natural-grass-hamper/900/700'
+  palmLeafBox: '/images/palm-leaf-storage-box.webp',
+  cushionCover: '/images/adivasi-pattern-cushion-cover.jpg',
+  paintedVase: '/images/painted-clay-vase.jpg',
+  reedMatSet: '/images/woven-reed-table-mat-set.jpg',
+  servingTray: '/images/wooden-tribal-serving-tray.jpg',
 };
 
 export const products = [
@@ -133,41 +122,4 @@ export const products = [
     category: 'Woodwork',
     image: productImages.servingTray,
   },
-  {
-    id: 13,
-    name: 'Handcrafted Jute Sling Bag',
-    description: 'Durable jute sling bag woven by hand and finished with cotton lining.',
-    price: 36,
-    artisanName: 'Priya Tudu',
-    category: 'Accessories',
-    image: productImages.juteBag,
-  },
-  {
-    id: 14,
-    name: 'Terracotta Spice Jar Set',
-    description: 'Set of three glazed terracotta jars for storing everyday kitchen spices.',
-    price: 48,
-    artisanName: 'Gopal Kisku',
-    category: 'Kitchenware',
-    image: productImages.spiceJars,
-  },
-  {
-    id: 15,
-    name: 'Beaded Anklet Pair',
-    description: 'Colorful beadwork anklets tied with braided cotton strings.',
-    price: 18,
-    artisanName: 'Mina Hembrom',
-    category: 'Jewelry',
-    image: productImages.ankletPair,
-  },
-  {
-    id: 16,
-    name: 'Natural Grass Laundry Hamper',
-    description: 'Large woven hamper made from natural grass with reinforced frame.',
-    price: 59,
-    artisanName: 'Rupa Kerketta',
-    category: 'Home Utility',
-    image: productImages.laundryHamper,
-  },
 ];
-

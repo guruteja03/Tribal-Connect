@@ -15,11 +15,11 @@ function CustomerDashboard() {
     <div className="space-y-5">
       <h1 className="section-title">Customer Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="card"><p className="text-sm">Cart Items</p><p className="text-2xl font-bold">{stats.cartItems}</p></div>
-        <div className="card"><p className="text-sm">Orders Placed</p><p className="text-2xl font-bold">{stats.orders}</p></div>
-        <div className="card"><p className="text-sm">Reviews Left</p><p className="text-2xl font-bold">{stats.reviews}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Cart Items</p><p className="text-2xl font-bold">{stats.cartItems}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Orders Placed</p><p className="text-2xl font-bold">{stats.orders}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Reviews Left</p><p className="text-2xl font-bold">{stats.reviews}</p></div>
       </div>
-      <p className="text-tribal-700">Browse products, place orders, and review crafts you purchase.</p>
+      <p className="break-words text-tribal-700">Browse products, place orders, and review crafts you purchase.</p>
     </div>
   );
 }

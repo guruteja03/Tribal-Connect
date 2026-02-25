@@ -18,11 +18,11 @@ function ConsultantDashboard() {
     <div className="space-y-5">
       <h1 className="section-title">Cultural Consultant Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="card"><p className="text-sm">Pending Reviews</p><p className="text-2xl font-bold">{stats.pending}</p></div>
-        <div className="card"><p className="text-sm">Approved</p><p className="text-2xl font-bold">{stats.approved}</p></div>
-        <div className="card"><p className="text-sm">Rejected</p><p className="text-2xl font-bold">{stats.rejected}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Pending Reviews</p><p className="text-2xl font-bold">{stats.pending}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Approved</p><p className="text-2xl font-bold">{stats.approved}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Rejected</p><p className="text-2xl font-bold">{stats.rejected}</p></div>
       </div>
-      <p className="text-tribal-700">Review cultural authenticity and product descriptions before publication.</p>
+      <p className="break-words text-tribal-700">Review cultural authenticity and product descriptions before publication.</p>
     </div>
   );
 }

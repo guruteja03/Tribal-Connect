@@ -19,7 +19,7 @@ function AddProductPage() {
     addProduct(
       {
         ...formData,
-        image: 'https://picsum.photos/seed/tribalcraft-artisan-default/900/700',
+        image: '/images/bamboo-basket.webp',
       },
       user?.name || 'Artisan'
     );
@@ -44,3 +44,4 @@ function AddProductPage() {
 }
 
 export default AddProductPage;
+

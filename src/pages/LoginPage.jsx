@@ -20,7 +20,7 @@ function LoginPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,14 +31,14 @@ function LoginPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (isInvalid) setIsInvalid(false);
+    if (errorMessage) setErrorMessage('');
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!isFormValid) {
-      setIsInvalid(true);
+      setErrorMessage('Use a valid email and password with at least 6 characters.');
       return;
     }
 
@@ -46,6 +46,12 @@ function LoginPage() {
     await new Promise((resolve) => setTimeout(resolve, 700));
 
     const user = login(formData);
+    if (!user) {
+      setIsLoading(false);
+      setErrorMessage('Incorrect email, password, or role. Use the same credentials from Signup.');
+      return;
+    }
+
     const redirectPath = location.state?.from?.pathname || rolePathMap[user.role] || '/home';
     navigate(redirectPath, { replace: true });
   };
@@ -98,7 +104,7 @@ function LoginPage() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`auth-input ${isInvalid && !emailValid ? 'is-error' : ''}`}
+              className={`auth-input ${errorMessage && !emailValid ? 'is-error' : ''}`}
               placeholder="you@example.com"
             />
 
@@ -113,7 +119,7 @@ function LoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`auth-input ${isInvalid && !passwordValid ? 'is-error' : ''}`}
+                className={`auth-input ${errorMessage && !passwordValid ? 'is-error' : ''}`}
                 placeholder="Minimum 6 characters"
               />
               <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="auth-toggle">
@@ -131,7 +137,7 @@ function LoginPage() {
               <option value="consultant">Cultural Consultant</option>
             </select>
 
-            {isInvalid ? <p className="auth-error">Use a valid email and password with at least 6 characters.</p> : null}
+            {errorMessage ? <p className="auth-error">{errorMessage}</p> : null}
 
             <button type="submit" className="auth-submit" disabled={isLoading}>
               {isLoading ? 'Signing In...' : 'Login'}

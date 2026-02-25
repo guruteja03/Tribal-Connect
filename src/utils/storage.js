@@ -22,11 +22,25 @@ const writeJSON = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
+const EXCLUDED_PRODUCT_NAMES = new Set([
+  'handcrafted jute sling bag',
+  'terracotta spice jar set',
+  'beaded anklet pair',
+  'natural grass laundry hamper',
+  'iphone',
+  'coffee cups',
+]);
+
+const stripExcludedProducts = (items) =>
+  items.filter((item) => !EXCLUDED_PRODUCT_NAMES.has(String(item?.name || '').trim().toLowerCase()));
+
 export const getProducts = () => {
   const stored = readJSON(STORAGE_KEYS.products, null);
   if (stored) {
-    const seedById = new Map(seedProducts.map((item) => [Number(item.id), item]));
-    const refreshedStored = stored.map((item) => {
+    const filteredStored = stripExcludedProducts(stored);
+    const filteredSeeds = stripExcludedProducts(seedProducts);
+    const seedById = new Map(filteredSeeds.map((item) => [Number(item.id), item]));
+    const refreshedStored = filteredStored.map((item) => {
       const seed = seedById.get(Number(item.id));
       if (!seed) return item;
       return {
@@ -35,8 +49,8 @@ export const getProducts = () => {
       };
     });
 
-    const knownIds = new Set(stored.map((item) => Number(item.id)));
-    const missingSeeds = seedProducts.filter((item) => !knownIds.has(Number(item.id)));
+    const knownIds = new Set(filteredStored.map((item) => Number(item.id)));
+    const missingSeeds = filteredSeeds.filter((item) => !knownIds.has(Number(item.id)));
     if (!missingSeeds.length) {
       writeJSON(STORAGE_KEYS.products, refreshedStored);
       return refreshedStored;
@@ -46,8 +60,9 @@ export const getProducts = () => {
     writeJSON(STORAGE_KEYS.products, merged);
     return merged;
   }
-  writeJSON(STORAGE_KEYS.products, seedProducts);
-  return seedProducts;
+  const filteredSeeds = stripExcludedProducts(seedProducts);
+  writeJSON(STORAGE_KEYS.products, filteredSeeds);
+  return filteredSeeds;
 };
 
 export const saveProducts = (products) => {

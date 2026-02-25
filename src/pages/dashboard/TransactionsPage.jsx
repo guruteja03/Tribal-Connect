@@ -11,7 +11,7 @@ function TransactionsPage() {
   return (
     <div className="space-y-4">
       <h1 className="section-title">Transactions</h1>
-      <div className="card overflow-x-auto">
+      <div className="card overflow-x-auto p-5 md:p-6">
         <table className="w-full min-w-[460px] text-left text-sm">
           <thead>
             <tr className="border-b border-tribal-200 text-tribal-800">

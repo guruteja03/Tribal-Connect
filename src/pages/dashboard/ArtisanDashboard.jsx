@@ -16,11 +16,11 @@ function ArtisanDashboard() {
     <div className="space-y-5">
       <h1 className="section-title">Artisan Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="card"><p className="text-sm">Listed Products</p><p className="text-2xl font-bold">{stats.products}</p></div>
-        <div className="card"><p className="text-sm">Pending Orders</p><p className="text-2xl font-bold">{stats.pendingOrders}</p></div>
-        <div className="card"><p className="text-sm">Avg Rating</p><p className="text-2xl font-bold">{stats.avg}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Listed Products</p><p className="text-2xl font-bold">{stats.products}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Pending Orders</p><p className="text-2xl font-bold">{stats.pendingOrders}</p></div>
+        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Avg Rating</p><p className="text-2xl font-bold">{stats.avg}</p></div>
       </div>
-      <p className="text-tribal-700">Use sidebar links to add/edit products and manage listings.</p>
+      <p className="break-words text-tribal-700">Use sidebar links to add/edit products and manage listings.</p>
     </div>
   );
 }
