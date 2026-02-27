@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AnimatedPage from '../components/animations/AnimatedPage';
@@ -28,6 +28,17 @@ function LoginPage() {
   const emailValid = useMemo(() => formData.email.includes('@') && formData.email.includes('.'), [formData.email]);
   const passwordValid = useMemo(() => formData.password.trim().length >= 6, [formData.password]);
   const isFormValid = emailValid && passwordValid;
+  const noticeMessage = location.state?.notice || '';
+
+  useEffect(() => {
+    const prefill = location.state?.prefill;
+    if (!prefill) return;
+    setFormData((prev) => ({
+      ...prev,
+      email: prefill.email || prev.email,
+      role: prefill.role || prev.role,
+    }));
+  }, [location.state]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -48,7 +59,7 @@ function LoginPage() {
     const user = login(formData);
     if (!user) {
       setIsLoading(false);
-      setErrorMessage('Incorrect email, password, or role. Use the same credentials from Signup.');
+      setErrorMessage('Incorrect email or password. Please try again.');
       return;
     }
 
@@ -137,6 +148,7 @@ function LoginPage() {
               <option value="consultant">Cultural Consultant</option>
             </select>
 
+            {noticeMessage ? <p className="text-sm text-green-700">{noticeMessage}</p> : null}
             {errorMessage ? <p className="auth-error">{errorMessage}</p> : null}
 
             <button type="submit" className="auth-submit" disabled={isLoading}>

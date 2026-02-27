@@ -34,6 +34,15 @@ function RegisterPage() {
 
     const result = register(formData);
     if (!result.ok) {
+      if (result.code === 'EMAIL_EXISTS') {
+        navigate('/login', {
+          state: {
+            prefill: { email: formData.email, role: formData.role },
+            notice: 'Account already exists. Please login with your credentials.',
+          },
+        });
+        return;
+      }
       setErrorMessage(result.error || 'Unable to register with these details.');
       return;
     }

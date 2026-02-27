@@ -7,7 +7,7 @@ function OrderHistoryPage() {
   const orderHistory = useMemo(
     () =>
       getOrders()
-        .filter((order) => order.userId === user?.id)
+        .filter((order) => String(order.userId) === String(user?.id))
         .map((order) => ({
           id: order.id,
           date: order.createdAt?.slice(0, 10),

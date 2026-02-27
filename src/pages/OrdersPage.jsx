@@ -7,7 +7,7 @@ function OrdersPage() {
   const orders = useMemo(() => {
     const allOrders = getOrders();
     if (user?.role === 'customer') {
-      return allOrders.filter((order) => order.userId === user.id);
+      return allOrders.filter((order) => String(order.userId) === String(user.id));
     }
     return allOrders;
   }, [user]);

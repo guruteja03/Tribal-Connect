@@ -113,6 +113,7 @@ export const addOrder = (payload) => {
   const created = {
     id: `ORD-${String(Date.now()).slice(-6)}`,
     ...payload,
+    userId: String(payload.userId),
     createdAt: new Date().toISOString(),
     status: payload.status || 'Placed',
   };

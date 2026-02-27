@@ -11,8 +11,10 @@ function CheckoutPage() {
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
 
   const placeOrder = () => {
+    if (!user?.id || cart.length === 0) return;
+
     addOrder({
-      userId: user?.id,
+      userId: String(user.id),
       userName: user?.name || 'Customer',
       amount: Number(total.toFixed(2)),
       items: cart,

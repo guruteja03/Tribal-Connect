@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getOrders, getProducts, getReviews } from '../../utils/storage';
 
@@ -17,7 +18,14 @@ function ArtisanDashboard() {
       <h1 className="section-title">Artisan Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Listed Products</p><p className="text-2xl font-bold">{stats.products}</p></div>
-        <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Pending Orders</p><p className="text-2xl font-bold">{stats.pendingOrders}</p></div>
+        <Link
+          to="/orders"
+          className="card flex min-h-28 flex-col justify-between p-5 transition hover:-translate-y-0.5 hover:shadow-card"
+          aria-label="View placed orders"
+        >
+          <p className="text-sm">Pending Orders</p>
+          <p className="text-2xl font-bold">{stats.pendingOrders}</p>
+        </Link>
         <div className="card flex min-h-28 flex-col justify-between p-5"><p className="text-sm">Avg Rating</p><p className="text-2xl font-bold">{stats.avg}</p></div>
       </div>
       <p className="break-words text-tribal-700">Use sidebar links to add/edit products and manage listings.</p>
